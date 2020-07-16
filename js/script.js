@@ -52,10 +52,16 @@ let form = document.forms[1];
 let inputForm = form.getElementsByClassName('adding__input')[0];
 let button = form.getElementsByTagName('button')[0];
 
-button.onclick = function() {
+button.onclick = function () {
     event.preventDefault();
-    var val = inputForm.value;
-    movieDB.movies.push(val);
+    let val = inputForm.value;
+    if (val.length > 21) {
+        let valShort = val.slice(0, 19);
+        movieDB.movies.push(valShort +'...');
+    } else {
+        movieDB.movies.push(val);
+    }
+    
     movieList.innerHTML = '';
     movieDB.movies.sort();
     movieDB.movies.forEach((film, i) => {
@@ -65,5 +71,7 @@ button.onclick = function() {
             </li>
         `;
     });
-    console.log(movieDB.movies);
 };
+
+let deleteElement = document.getElementsByClassName('delete');
+console.log(deleteElement);
